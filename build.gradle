@@ -1,0 +1,36 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+  }
+}
+
+plugins {
+  id("io.spinnaker.plugin.bundler").version("$spinnakerGradleVersion")
+  id("com.palantir.git-version").version("0.12.2")
+}
+
+spinnakerBundle {
+  pluginId = "Redbox.Istio"
+  description = "A plugin that provides an Istio deployment stage for Kubernetes."
+  provider = "https://github.com/spinnaker-plugin-examples"
+  version = rootProject.version
+}
+
+version = normalizedVersion()
+
+subprojects {
+  group = "com.redbox.spinnaker.istio"
+  version = rootProject.version
+}
+
+String normalizedVersion() {
+  String fullVersion = gitVersion()
+  String normalized = fullVersion.split("-").first()
+  if (fullVersion.contains("dirty")) {
+    return "$normalized-SNAPSHOT"
+  } else {
+    return normalized
+  }
+}
