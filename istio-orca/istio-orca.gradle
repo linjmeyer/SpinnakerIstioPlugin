@@ -27,7 +27,7 @@ repositories {
 
 spinnakerPlugin {
     serviceName = "orca"
-    pluginClass = "com.redbox.spinnaker.istio"
+    pluginClass = "com.redbox.spinnaker.istio.IstioStagePlugin"
 }
 
 dependencies {
